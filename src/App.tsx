@@ -6,6 +6,7 @@ function App() {
   return (
     <div>
       <DashboardLayout >
+        <div className="flex gap-4">
         <DashboardCard 
         title="Student"
         value={750}
@@ -15,6 +16,19 @@ function App() {
         title="Teachers"
         value={100}
         />
+
+        <DashboardCard 
+        title="Teachers"
+        value={100}
+        />
+
+        <DashboardCard 
+        title="Teachers"
+        value={100}
+        />
+
+        
+        </div>
 
       </ DashboardLayout >
     </div>

@@ -8,7 +8,7 @@ const DashboardCard = ({
   value,
 }: DashboardCardProps) => {
   return (
-    <div className="rounded-lg border p-6 shadow-sm">
+    <div className="rounded-lg border border-gray-200 p-6 shadow-sm flex-1">
       <h3 className="text-gray-500">
         {title}
       </h3>

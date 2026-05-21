@@ -10,13 +10,16 @@ const DashboardLayout = ({
 }: DashboardLayoutProps) => {
   return (
 
-      <div className="flex">
-        <Sidebar />      
+      <div className="flex h-screen bg-gray-50">
+        <Sidebar />
+
+        <div className="flex flex-col flex-1 gap-2 overflow-hidden">      
         <Navbar />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-white rounded-xl">
           {children}
         </main>
+        </div>
       </div>
   );
 };

@@ -1,11 +1,19 @@
 @import "tailwindcss";
+@source "../src/components/**/*.{ts,tsx}";
+@source "../src/app/**/*.{ts,tsx}";
 
-* {
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background-color: cyan;
+}
 }
 
-body {
-  font-family: sans-serif;
+@theme {
+  --text-tiny: 0.7rem;
 }

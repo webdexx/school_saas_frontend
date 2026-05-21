@@ -2,6 +2,7 @@ export const sidebarMenu = [
   {
     id: 1,
     label: "Dashboard",
+    icon: "LuLayoutDashboard"
   },
   {
     id: 2,

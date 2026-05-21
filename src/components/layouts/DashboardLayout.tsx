@@ -9,17 +9,15 @@ const DashboardLayout = ({
   children,
 }: DashboardLayoutProps) => {
   return (
-    <div>
-      <Navbar />
 
       <div className="flex">
-        <Sidebar />
+        <Sidebar />      
+        <Navbar />
 
         <main className="flex-1 p-6">
           {children}
         </main>
       </div>
-    </div>
   );
 };
 

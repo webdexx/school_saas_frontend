@@ -17,7 +17,7 @@ const Navbar = () => {
         onChange={(e) => setSearch(e.target.value)}
         className="rounded-md px-4 min-w-64 w-sm h-10 outline-none bg-sky-900 border border-sky-200 shadow-sm placeholder-sky-200 text-sky-300"
       />
-      <div className="flex">
+      <div className="flex text-sky-100">
         {navbarMenu.map((item) => (
           <button
             key={item.id}
@@ -26,8 +26,7 @@ const Navbar = () => {
             {item.label}
           </button>
         ))}
-      </div>
-      <div className="actions flex text-sky-100">
+        
         <button onClick={() => setNotifications(false)}>
           <NotificationBell size={20}/>
         </button>

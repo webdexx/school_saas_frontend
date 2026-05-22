@@ -4,7 +4,7 @@ import type { IconType } from "react-icons";
 import { user } from "@/constants/userRole";
 
 interface NavItemProps {
-  icon: IconType; // ✅ was: Lu
+  icon: IconType;
   label: string;
   active?: boolean;
   badge?: number;
@@ -28,7 +28,7 @@ const NavItem = ({
       ${active ? "bg-white/20" : "hover:bg-white/10"}`}
   >
     <Icon
-      className={`w-[18px] h-[18px] shrink-0 ${active ? "text-white" : "text-white/75"}`}
+      className={`w-4.5 h-4.5 shrink-0 ${active ? "text-white" : "text-white/75"}`}
     />
     <span
       className={`text-[13px] ${active ? "text-white font-medium" : "text-white/80"}`}

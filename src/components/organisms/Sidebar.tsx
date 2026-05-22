@@ -1,13 +1,26 @@
 import { sidebarMenu } from "@/constants/sidebarMenu";
+import { LuSchool } from "react-icons/lu";
 
 const Sidebar = () => {
-  return (
-    <aside className="h-full w-64 p-4 bg-sky-700 overflow-hidden">
-      <h2 className="mb-6 text-xl text-sky-50 font-bold flex gap-2 align-middle flex-col">
-        School Name <span className="bg-sky-700 px-6 py-0.5 h-full w-fit rounded border border-sky-200 text-tiny">Upgrade Plan</span>
-      </h2>
 
-      <div className="flex flex-col gap-2">
+  return (
+    <aside className="h-full w-64 px-4 bg-sky-700 overflow-hidden">
+
+      {/* Header */}
+      <div className="px-5 pt-6 pb-1 border-b border-white/15">
+        {/* School branding */}
+        <div className="flex items-center gap-2.5 mb-4">
+          <div className="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center">
+            <LuSchool className="text-white w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-sm font-medium text-white leading-tight">Greenfield Academy</div>
+            <div className="text-[11px] text-white/60">School Management System</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 pt-4 pb-4 border-b border-white/15">
         {sidebarMenu.map((item) => (
           <button
             key={item.id}

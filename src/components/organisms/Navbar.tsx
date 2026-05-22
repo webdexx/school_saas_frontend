@@ -6,6 +6,7 @@ import {
   LuCalendar,
   LuChevronDown,
 } from "react-icons/lu";
+import { user } from "@/constants/userRole";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
@@ -13,8 +14,13 @@ const Navbar = () => {
 
   const navLinks = ["Home", "Timetable", "Exams"];
 
+   const initials = [user.firstname?.[0], user.lastname?.[0]]
+    .filter(Boolean)
+    .join("")
+    .toUpperCase();
+
   return (
-    <nav className="flex items-center gap-3 bg-sky-700 h-14 px-4 rounded-xl">
+    <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4 rounded-xl">
 
       {/* Search */}
       <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-sm">
@@ -34,7 +40,7 @@ const Navbar = () => {
           <button
             key={link}
             onClick={() => setActiveLink(link)}
-            className={`text-sm px-5 py-1 rounded-md transition-all duration-150
+            className={`text-sm px-5 py-1 rounded-md transition-all duration-150 cursor-pointer
               ${
                 activeLink === link
                   ? "bg-white/10 text-white border border-sky-300/40"
@@ -81,13 +87,13 @@ const Navbar = () => {
       {/* User Profile */}
       <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white/8 transition-all">
         <div className="w-8 h-8 rounded-full bg-sky-900 border border-sky-300/30 grid place-items-center text-sky-100 text-xs font-medium">
-          AS
+          {initials}
         </div>
         <div className="flex flex-col text-left">
           <span className="text-sky-100 text-sm font-medium leading-tight">
-            Mohammed Aasif
+            {user.firstname + " " + user.lastname}
           </span>
-          <span className="text-sky-300/55 text-xs leading-tight">Admin</span>
+          <span className="text-sky-300/55 text-xs leading-tight">{user.role}</span>
         </div>
         <LuChevronDown size={14} className="text-sky-300/40" />
       </button>

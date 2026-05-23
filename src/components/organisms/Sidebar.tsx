@@ -63,7 +63,7 @@ const Sidebar = () => {
   const menuType = user.role === "Admin" ? adminMenu : principalMenu;
 
   return (
-    <aside className="h-full w-fit px-4 bg-sky-700 overflow-hidden">
+    <aside className="h-full w-fit px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700">
       {/* Header */}
       <div className="pe-5 pt-6 pb-1 border-b border-white/15">
         {/* School branding */}

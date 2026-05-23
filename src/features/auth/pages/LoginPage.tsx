@@ -31,12 +31,12 @@ const LoginPage = () => {
 
   return (
     <AuthLayout>
-      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-md">
-        <h1 className="mb-2 text-3xl font-bold">
+      <div className="w-full max-w-md rounded-xl bg-sky-800 p-8 shadow-md border border-sky-300/40">
+        <h1 className="mb-2 text-3xl font-bold text-sky-100">
           Welcome Back
         </h1>
 
-        <p className="mb-6 text-gray-500">
+        <p className="mb-6 text-sky-100">
           Login to continue
         </p>
 

@@ -20,7 +20,7 @@ const Navbar = () => {
     .toUpperCase();
 
   return (
-    <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4 rounded-xl">
+    <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4">
 
       {/* Search */}
       <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-72">

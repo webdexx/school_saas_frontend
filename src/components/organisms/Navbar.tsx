@@ -20,10 +20,10 @@ const Navbar = () => {
     .toUpperCase();
 
   return (
-    <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4 rounded-xl">
+    <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4">
 
       {/* Search */}
-      <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-sm">
+      <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-72">
         <LuSearch size={16} className="text-sky-300/50" />
         <input
           type="text"
@@ -35,7 +35,7 @@ const Navbar = () => {
       </div>
 
       {/* Nav Links */}
-      <div className="flex items-center gap-4 ml-14">
+      <div className="flex items-center gap-3 ml-14">
         {navLinks.map((link) => (
           <button
             key={link}

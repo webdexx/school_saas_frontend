@@ -2,13 +2,15 @@ import { adminMenu, principalMenu } from "@/constants/sidebarMenu";
 import { LuSchool } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { user } from "@/constants/userRole";
+import { NavLink } from "react-router-dom";
 
 interface NavItemProps {
-  icon: IconType; // ✅ was: Lu
+  icon: IconType;
   label: string;
   active?: boolean;
   badge?: number;
   badgeType?: "alert" | "neutral";
+  path?: string;
 }
 
 interface NavSectionProps {
@@ -22,13 +24,15 @@ const NavItem = ({
   active,
   badge,
   badgeType,
+  path,
 }: NavItemProps) => (
+  <NavLink to={path || "#"} >
   <div
     className={`flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg mb-0.5 cursor-pointer transition-colors
       ${active ? "bg-white/20" : "hover:bg-white/10"}`}
   >
     <Icon
-      className={`w-[18px] h-[18px] shrink-0 ${active ? "text-white" : "text-white/75"}`}
+      className={`w-4.5 h-4.5 shrink-0 ${active ? "text-white" : "text-white/75"}`}
     />
     <span
       className={`text-[13px] ${active ? "text-white font-medium" : "text-white/80"}`}
@@ -44,6 +48,7 @@ const NavItem = ({
       </span>
     )}
   </div>
+  </NavLink>
 );
 
 const NavSection = ({ label, items }: NavSectionProps) => (
@@ -63,7 +68,7 @@ const Sidebar = () => {
   const menuType = user.role === "Admin" ? adminMenu : principalMenu;
 
   return (
-    <aside className="h-full w-fit px-4 bg-sky-700 overflow-hidden">
+    <aside className="h-full w-fit px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700">
       {/* Header */}
       <div className="pe-5 pt-6 pb-1 border-b border-white/15">
         {/* School branding */}

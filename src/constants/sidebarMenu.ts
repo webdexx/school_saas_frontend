@@ -1,70 +1,162 @@
-import {
-  LuLayoutDashboard,
-  LuBell,
-  LuUsers,
-  LuGraduationCap,
-  LuCalendarDays,
-  LuClipboardCheck,
-  LuFileText,
-  LuChartBarDecreasing,
-  LuIndianRupee,
-  LuBadgeCheck,
-  LuMessageCircle,
-  LuCalendar,
-  LuSettings,
-} from "react-icons/lu";
+// constants/sidebarMenu.ts
+import { ROUTES } from "./routes";
 
-export const adminMenu = {
-  overview: [
-    { icon: LuLayoutDashboard, label: "Dashboard", active: true, path: "/" },
-    { icon: LuBell, label: "Announcements", badge: 3, badgeType: "alert" as const, path: "/announcements" },
-  ],
-  academic: [
-    { icon: LuUsers, label: "Students", badge: 842, badgeType: "neutral" as const, path: "/students"},
-    { icon: LuGraduationCap, label: "Teachers", path: "/teachers" },
-    { icon: LuCalendarDays, label: "Classes & Timetable", path: "/time-table" },
-    { icon: LuClipboardCheck, label: "Attendance", path: "/attendance" },
-    { icon: LuFileText, label: "Examinations", path: "/examinations" },
-    { icon: LuChartBarDecreasing, label: "Performance Reports", path: "/reports" },
-  ],
-  administration: [
-    { icon: LuIndianRupee, label: "Fees & Finance", path: "/finance" },
-    { icon: LuBadgeCheck, label: "Staff Management", path: "/staff-management" },
-    {
-      icon: LuMessageCircle,
-      label: "Parent Communication",
-      badge: 7,
-      badgeType: "alert" as const,
-      path: "/communication"
-    },
-    { icon: LuCalendar, label: "Events & Calendar", path: "/calendar" },
-  ],
-  system: [{ icon: LuSettings, label: "Settings", path: "/settings" }],
-};
+export type UserRole = "admin" | "superadmin" | "principal" | "student" | "teacher" | "parent" | "accountant";
 
-export const principalMenu = {
-  overview: [
-    { icon: LuLayoutDashboard, label: "Dashboard", active: true },
-    { icon: LuBell, label: "Announcements", badge: 3, badgeType: "alert" as const },
-  ],
-  academic: [
-    { icon: LuUsers, label: "Students", badge: 842, badgeType: "neutral" as const },
-    { icon: LuGraduationCap, label: "Teachers" },
-    { icon: LuCalendarDays, label: "Classes & Timetable" },
-    { icon: LuClipboardCheck, label: "Attendance" },
-    { icon: LuFileText, label: "Examinations" },
-    { icon: LuChartBarDecreasing, label: "Performance Reports" },
-  ],
-  administration: [
-    { icon: LuIndianRupee, label: "Fees & Finance" },
-    { icon: LuBadgeCheck, label: "Staff Management" },
+export interface MenuSection {
+  id: string;
+  label: string;
+  items: (typeof ROUTES)[string][];
+}
+
+type RoleMenu = MenuSection[];
+
+const r = (key: keyof typeof ROUTES) => ROUTES[key]; // shorthand
+
+export const ROLE_MENUS: Record<UserRole, RoleMenu> = {
+  superadmin: [
     {
-      icon: LuMessageCircle,
-      label: "Parent Communication",
-      badge: 7,
-      badgeType: "alert" as const,
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements"), r("notifications")],
     },
-    { icon: LuCalendar, label: "Events & Calendar" },
+    {
+      id: "management",
+      label: "Management",
+      items: [r("students"), r("teachers"), r("staffManagement")],
+    },
+    {
+      id: "Money",
+      label: "Money",
+      items: [r("finance"), r("moneyReports")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
   ],
-  system: [{ icon: LuSettings, label: "Settings" }],
+
+  admin: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements")],
+    },
+    {
+      id: "academic",
+      label: "Academic",
+      items: [r("students"), r("teachers"), r("timetable"), r("attendance"), r("examinations"), r("reports")],
+    },
+    {
+      id: "administration",
+      label: "Administration",
+      items: [r("finance"), r("staffManagement"), r("communication"), r("calendar")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
+  ],
+
+  principal: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements")],
+    },
+    {
+      id: "academic",
+      label: "Academic",
+      items: [r("students"), r("teachers"), r("timetable"), r("attendance"), r("examinations"), r("reports")],
+    },
+    {
+      id: "administration",
+      label: "Administration",
+      items: [r("communication"), r("calendar")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
+  ],
+
+  teacher: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements")],
+    },
+    {
+      id: "academic",
+      label: "Academic",
+      items: [r("timetable"), r("attendance"), r("examinations"), r("reports")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
+  ],
+
+  student: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements")],
+    },
+    {
+      id: "academic",
+      label: "Academic",
+      items: [r("timetable"), r("attendance"), r("examinations"), r("reports")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
+  ],
+
+  parent: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard"), r("announcements")],
+    },
+    {
+      id: "academics",
+      label: "Academics",
+      items: [r("attendance"), r("reports"), r("examinations")],
+    },
+    {
+      id: "communication",
+      label: "Communication",
+      items: [r("communication"), r("calendar")],
+    },
+    {
+      id: "finance",
+      label: "Finance",
+      items: [r("finance")],
+    },
+  ],
+
+  accountant: [
+    {
+      id: "overview",
+      label: "Overview",
+      items: [r("dashboard")],
+    },
+    {
+      id: "finance",
+      label: "Finance",
+      items: [r("finance")],
+    },
+    {
+      id: "system",
+      label: "System",
+      items: [r("settings")],
+    },
+  ],
 };

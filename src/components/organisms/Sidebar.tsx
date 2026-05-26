@@ -1,4 +1,4 @@
-import { adminMenu, principalMenu } from "@/constants/sidebarMenu";
+import { ROLE_MENUS } from "@/constants/sidebarMenu";
 import { LuSchool } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { user } from "@/constants/userRole";
@@ -21,25 +21,25 @@ interface NavSectionProps {
 const NavItem = ({
   icon: Icon,
   label,
-  active,
   badge,
   badgeType,
   path,
 }: NavItemProps) => (
   <NavLink to={path || "#"} >
+    {({ isActive }) => (
   <div
     className={`flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg mb-0.5 cursor-pointer transition-colors
-      ${active ? "bg-white/20" : "hover:bg-white/10"}`}
+      ${isActive ? "bg-white/20" : "hover:bg-white/10"}`}
   >
     <Icon
-      className={`w-4.5 h-4.5 shrink-0 ${active ? "text-white" : "text-white/75"}`}
+      className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-white" : "text-white/75"}`}
     />
     <span
-      className={`text-[13px] ${active ? "text-white font-medium" : "text-white/80"}`}
+      className={`text-[13px] ${isActive ? "text-white font-medium" : "text-white/80"}`}
     >
       {label}
     </span>
-    {badge && (
+    {badge !== undefined && (
       <span
         className={`ml-auto text-[10px] font-medium px-1.5 py-0.5 rounded-full
           ${badgeType === "alert" ? "bg-rose-600 text-white" : "bg-white/15 text-white/70"}`}
@@ -47,7 +47,7 @@ const NavItem = ({
         {badge}
       </span>
     )}
-  </div>
+  </div>)}
   </NavLink>
 );
 
@@ -65,10 +65,11 @@ const NavSection = ({ label, items }: NavSectionProps) => (
 const Divider = () => <div className="h-px bg-white/15 mx-3 my-1.5" />;
 
 const Sidebar = () => {
-  const menuType = user.role === "Admin" ? adminMenu : principalMenu;
+  const menu = ROLE_MENUS[user.role];
+  
 
   return (
-    <aside className="h-full w-fit px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700">
+    <aside className="h-full w-fit px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700" aria-label="Main navigation">
       {/* Header */}
       <div className="pe-5 pt-6 pb-1 border-b border-white/15">
         {/* School branding */}
@@ -78,35 +79,29 @@ const Sidebar = () => {
           </div>
           <div>
             <div className="text-sm font-medium text-white leading-tight">
-              Greenfield Academy
+              {user.org_name || "Super Admin"}
             </div>
             <div className="text-[11px] text-white/60">
-              School Management System
+              {user.org_name ? "School Management System" : "Superadmin Dashboard"}
             </div>
           </div>
         </div>
       </div>
 
-      <NavSection label="Overview" items={menuType.overview} />
-      <Divider />
-      <NavSection label="Academic" items={menuType.academic} />
-      <Divider />
-      <NavSection label="Administration" items={menuType.administration} />
-      <Divider />
-      <NavSection label="System" items={menuType.system} />
-
-      {/* <div className="flex flex-col gap-2 pt-4 pb-4 border-b border-white/15">
-        {sidebarMenu.map((item) => (
-          <button
-            key={item.id}
-            className="px-4 py-2 text-left flex items-center gap-1 text-sky-50 hover:text-sky-300 cursor-pointer"
-          >
-            <item.icon size={18} />
-            {item.label}
-          </button>
-        ))}
-      </div> */}
+    {menu.map((section, i) => (
+      <>
+        {i > 0 && <Divider key={'divider-${section.id'} />}
+        <NavSection key={section.id} label={section.label} items={section.items} />
+      </>
+    ))}
     </aside>
+      // <NavSection label="Overview" items={menuType.overview} />
+      // <Divider />
+      // <NavSection label="Academic" items={menuType.academic} />
+      // <Divider />
+      // <NavSection label="Administration" items={menuType.administration} />
+      // <Divider />
+      // <NavSection label="System" items={menuType.system} />
   );
 };
 

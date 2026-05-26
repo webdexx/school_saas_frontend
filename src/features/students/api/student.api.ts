@@ -8,4 +8,4 @@ export const getStudents =
             await api.get("/students");
     
             return response.data;
-    };
+    }; 

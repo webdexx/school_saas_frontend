@@ -4,6 +4,8 @@ import type { IconType } from "react-icons";
 import { user } from "@/constants/userRole";
 import { NavLink } from "react-router-dom";
 
+import { useSidebarStore } from "@/store/useSidebarStore";
+
 interface NavItemProps {
   icon: IconType;
   label: string;
@@ -66,19 +68,21 @@ const Divider = () => <div className="h-px bg-white/15 mx-3 my-1.5" />;
 
 const Sidebar = () => {
   const menu = ROLE_MENUS[user.role];
+
+  const { isOpen } = useSidebarStore();
   
 
   return (
-    <aside className="h-full w-fit px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700" aria-label="Main navigation">
+    <aside className={`h-full ${isOpen ? 'w-fit' : 'w-0' } px-4 bg-sky-700 overflow-y-scroll scrollbar-track-sky-700 aria-label="Main navigation`}>
       {/* Header */}
-      <div className="pe-5 pt-6 pb-1 border-b border-white/15">
+      { isOpen && <div className="pe-5 pt-6 pb-1 border-b border-white/15">
         {/* School branding */}
         <div className="flex items-center gap-2.5 mb-4">
           <div className="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center">
             <LuSchool className="text-white w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-medium text-white leading-tight">
+            <div className="text-sm font-medium text-white leading-tight w-32">
               {user.org_name || "Super Admin"}
             </div>
             <div className="text-[11px] text-white/60">
@@ -86,7 +90,7 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
 
     {menu.map((section, i) => (
       <>

@@ -5,10 +5,15 @@ import {
   LuBell,
   LuCalendar,
   LuChevronDown,
+  LuMenu,
 } from "react-icons/lu";
 import { user } from "@/constants/userRole";
 
+import { useSidebarStore } from "@/store/useSidebarStore";
+
 const Navbar = () => {
+  const { toggleSidebar } = useSidebarStore();
+
   const [search, setSearch] = useState("");
   const [activeLink, setActiveLink] = useState("Home");
 
@@ -21,21 +26,21 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4">
-
+      <button onClick={ toggleSidebar }><LuMenu size={24} className="text-sky-50/70 cursor-pointer"/></button>
       {/* Search */}
-      <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-72">
+      <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-sm">
         <LuSearch size={16} className="text-sky-300/50" />
         <input
           type="text"
           placeholder="Search students, classes..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-transparent outline-none text-sky-200 placeholder-sky-200/40 text-sm w-full"
+          className="bg-transparent outline-none text-sky-200 placeholder-sky-200/40 text-sm lg:w-full md:w-md sm:w-sm"
         />
       </div>
 
       {/* Nav Links */}
-      <div className="flex items-center gap-3 ml-14">
+      <div className="flex items-center gap-2 ml-4">
         {navLinks.map((link) => (
           <button
             key={link}
@@ -93,7 +98,7 @@ const Navbar = () => {
           <span className="text-sky-100 text-sm font-medium leading-tight">
             {user.firstname + " " + user.lastname}
           </span>
-          <span className="text-sky-300/55 text-xs leading-tight">{user.role}</span>
+          <span className="text-sky-300/55 text-xs leading-tight">{user.role.toLocaleUpperCase()}</span>
         </div>
         <LuChevronDown size={14} className="text-sky-300/40" />
       </button>

@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import Input from "@/components/ui/Input";
 import AuthLayout from "@/components/layouts/AuthLayout";
-import { LuEye, LuEyeOff, LuLoaderCircle, LuLock, LuMail } from "react-icons/lu";
+import {
+  LuEye,
+  LuEyeOff,
+  LuLoaderCircle,
+  LuLock,
+  LuMail,
+} from "react-icons/lu";
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { login } = useAuth();
+  const { login, isLoading, user } = useAuth();
 
   const [email, setEmail] = useState("");
 
@@ -18,24 +24,24 @@ const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     document.title = "Login Page";
   }, []);
 
-  const handleLogin = () => {
-    setLoading(true);
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+  }}, [user, navigate]);
 
-    const fakeUser = {
-      id: 1,
-      name: "Rahul",
-      role: "super_admin",
-    };
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    login(fakeUser);
-
-    navigate("/");
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+      console.log("Login Error!", error);
+    }
   };
 
   return (
@@ -45,6 +51,7 @@ const LoginPage = () => {
 
         <p className="mb-6 text-sky-900">Login to continue</p>
 
+        <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <label className="block text-[11px] font-medium tracking-[0.06em] uppercase text-sky-800 mb-1.5">
             Email address
@@ -86,28 +93,26 @@ const LoginPage = () => {
             </button>
           </div>
 
-          <button
-            onClick={() => setLoading(true)}
-            className="w-1/2 rounded bg-transparent border border-sky-700 px-4 py-1 text-sm text-sky-800 cursor-pointer hover:bg-sky-700 hover:text-sky-50"
-          >
+          <button className="w-1/2 rounded bg-transparent border border-sky-700 px-4 py-1 text-sm text-sky-800 cursor-pointer hover:bg-sky-700 hover:text-sky-50">
             Forgot Password?
           </button>
 
           <button
-            onClick={handleLogin}
-            disabled={loading}
+            type="submit"
+            disabled={isLoading}
             className="w-full rounded-md bg-sky-800 py-3 text-sky-50 cursor-pointer hover:bg-sky-700 hover:text-sky-50"
           >
-            {loading ? (
+            {isLoading ? (
               <div className="flex items-center justify-center pe-2">
                 <span>Logging in...</span>
-                <LuLoaderCircle className="animate-spin"/>
+                <LuLoaderCircle className="animate-spin" />
               </div>
             ) : (
               "Login"
             )}
           </button>
         </div>
+        </form>
       </div>
     </AuthLayout>
   );

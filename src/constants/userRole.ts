@@ -10,6 +10,6 @@ interface User {
 export const user: User = {
   firstname: "Mohammed",
   lastname: "Aasif",
-  role: "principal",
+  role: "admin",
   org_name: "Emmanuel Mission School",
 };

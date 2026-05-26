@@ -1,6 +1,10 @@
 import {
-  createContext,
+  createContext
 } from "react";
+
+export type Auth = {
+  token: string,
+}
 
 export type User = {
   id: number;
@@ -9,9 +13,10 @@ export type User = {
 };
 
 type AuthContextType = {
-  user: User | null;
-  login: (userData: User) => void;
+  user: Auth | null;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  isLoading: boolean;
 };
 
 export const AuthContext =

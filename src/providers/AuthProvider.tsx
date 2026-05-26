@@ -1,10 +1,11 @@
 import {
-  useEffect,
   useState,
 } from "react";
 
 import { AuthContext } from "@/providers/AuthContext";
-import type { User } from "@/providers/AuthContext";
+import type { Auth } from "@/providers/AuthContext";
+
+import { login as loginApi } from "@/features/auth/api/auth.api"
 
 export const AuthProvider = ({
   children,
@@ -12,33 +13,31 @@ export const AuthProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] =
-    useState<User | null>(null);
-
+    useState<Auth | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
       
 
-  const login = (userData: User) => {
-    localStorage.setItem(
-      "user",
-      JSON.stringify(userData)
-    );
+  const login = async (email: string, password: string) => {
+    setIsLoading(true);
 
-    setUser(userData);
+    try {
+      const authData = await loginApi(email, password);
+      setUser(authData);
+      localStorage.setItem("token", authData.token);
+      console.log("Auth Token:", authData.token);
+    } catch (error) {
+      console.log("Error Occured:", error)
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 
     setUser(null);
   };
-
-  useEffect(() => {
-    const storedUser =
-      localStorage.getItem("user");
-
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
     return (
     <AuthContext.Provider
@@ -46,6 +45,7 @@ export const AuthProvider = ({
         user,
         login,
         logout,
+        isLoading
       }}
     >
       {children}

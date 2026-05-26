@@ -11,6 +11,7 @@ import { user } from "@/constants/userRole";
 
 import { useSidebarStore } from "@/store/useSidebarStore";
 
+
 const Navbar = () => {
   const { toggleSidebar } = useSidebarStore();
 
@@ -19,14 +20,17 @@ const Navbar = () => {
 
   const navLinks = ["Home", "Timetable", "Exams"];
 
-   const initials = [user.firstname?.[0], user.lastname?.[0]]
+  const initials = [user.firstname?.[0], user.lastname?.[0]]
     .filter(Boolean)
     .join("")
     .toUpperCase();
 
+
   return (
     <nav className="flex items-center gap-3 bg-sky-700 h-14 pe-4">
-      <button onClick={ toggleSidebar }><LuMenu size={24} className="text-sky-50/70 cursor-pointer"/></button>
+      <button onClick={toggleSidebar}>
+        <LuMenu size={24} className="text-sky-50/70 cursor-pointer" />
+      </button>
       {/* Search */}
       <div className="flex items-center gap-2 bg-sky-800 border border-sky-300/30 rounded-lg px-3 h-9 w-sm">
         <LuSearch size={16} className="text-sky-300/50" />
@@ -98,9 +102,14 @@ const Navbar = () => {
           <span className="text-sky-100 text-sm font-medium leading-tight">
             {user.firstname + " " + user.lastname}
           </span>
-          <span className="text-sky-300/55 text-xs leading-tight">{user.role.toLocaleUpperCase()}</span>
+          <span className="text-sky-300/55 text-xs leading-tight">
+            {user.role.toLocaleUpperCase()}
+          </span>
         </div>
-        <LuChevronDown size={14} className="text-sky-300/40" />
+        <LuChevronDown
+          size={14}
+          className="text-sky-300/40"
+        />
       </button>
     </nav>
   );

@@ -1,14 +1,28 @@
+import Skeleton from "@/components/ui/Skeleton";
 import { useTeachers } from "../hooks/useTeachers";
 
 const TeachersPage = () => {
   const {
     data: teachers,
-    isLoading = false,
+    isLoading,
     isError,
   } = useTeachers();
 
-  if (!isLoading) {
-    return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-full rounded-md p-4">
+              <div className="flex animate-pulse space-x-4">
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </div>
+              <div className="flex animate-pulse space-x-4">
+                <Skeleton />
+                <Skeleton />
+              </div>
+            </div>
+    );
   }
 
   if (isError) {
@@ -37,7 +51,7 @@ const TeachersPage = () => {
 
             <p>{teacher.email}</p>
 
-            <p>{teacher.className}</p>
+            <p>{teacher.qualification}</p>
           </div>
         ))}
       </div>

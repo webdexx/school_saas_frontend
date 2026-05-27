@@ -6,6 +6,7 @@ import {
   LuMessageCircle, LuCalendar, LuSettings,
   LuBellElectric,
   LuReceiptIndianRupee,
+  LuBook,
 } from "react-icons/lu";
 import type { IconType } from "react-icons";
 
@@ -22,6 +23,7 @@ export const ROUTES: Record<string, RouteDefinition> = {
   dashboard:           { id: "dashboard",           icon: LuLayoutDashboard,    label: "Dashboard",            path: "/" },
   announcements:       { id: "announcements",       icon: LuBell,               label: "Announcements",        path: "/announcements",     badgeType: "alert" },
   students:            { id: "students",            icon: LuUsers,              label: "Students",             path: "/students",          badgeType: "neutral" },
+  subjects:            { id: "subjects",            icon: LuBook,              label: "Subjects",             path: "/subjects",          badgeType: "neutral" },
   teachers:            { id: "teachers",            icon: LuGraduationCap,      label: "Teachers",             path: "/teachers" },
   timetable:           { id: "timetable",           icon: LuCalendarDays,       label: "Classes & Timetable",  path: "/time-table" },
   attendance:          { id: "attendance",          icon: LuClipboardCheck,     label: "Attendance",           path: "/attendance" },

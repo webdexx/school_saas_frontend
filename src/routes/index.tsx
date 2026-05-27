@@ -7,9 +7,10 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 
 import ProtectedRoute from "./ProtectedRoute";
 
-import StudentsPage from "@/features/students/pages/StudentsPage"
+import StudentsPage from "@/features/students/pages/StudentsPage";
 import TeachersPage from "@/features/teachers/pages/TeachersPage";
 import ParentsPage from "@/features/parents/pages/ParentsPage";
+import SubjectsPage from "@/features/subjects/pages/SubjectsPage";
 
 const isAuthenticated = true;
 
@@ -39,7 +40,17 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-    {
+  {
+    path: "/subjects",
+    element: (
+      <ProtectedRoute isAuthenticated={isAuthenticated}>
+        <DashboardLayout>
+          <SubjectsPage />
+        </DashboardLayout>
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: "/teachers",
     element: (
       <ProtectedRoute isAuthenticated={isAuthenticated}>
@@ -49,7 +60,7 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-    {
+  {
     path: "/parents",
     element: (
       <ProtectedRoute isAuthenticated={isAuthenticated}>

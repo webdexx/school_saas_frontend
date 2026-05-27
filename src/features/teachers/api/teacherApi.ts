@@ -7,5 +7,5 @@ export const getTeachers =
         const response =
             await api.get("/teachers");
     
-            return response.data;
+            return response.data.teachers;
     };

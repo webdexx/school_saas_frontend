@@ -1,25 +1,20 @@
-import {
-  createContext
-} from "react";
-
-export type Auth = {
-  token: string,
-}
+import { createContext } from "react";
 
 export type User = {
-  id: number;
-  name: string;
+  id: string;
+  email: string;
   role: string;
+  org_id: string;
+  firstname: string;
+  lastname: string;
 };
 
 type AuthContextType = {
-  user: Auth | null;
+  user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   isLoading: boolean;
+  isAuthenticated: boolean;
 };
 
-export const AuthContext =
-  createContext<AuthContextType | null>(
-    null
-);
+export const AuthContext = createContext<AuthContextType | null>(null);

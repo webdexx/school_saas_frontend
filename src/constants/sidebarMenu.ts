@@ -23,7 +23,7 @@ export const ROLE_MENUS: Record<UserRole, RoleMenu> = {
     {
       id: "management",
       label: "Management",
-      items: [r("students"), r("teachers"), r("staffManagement")],
+      items: [r("students"), r("teachers"), r("staffManagement"), r("subjects")],
     },
     {
       id: "Money",
@@ -46,7 +46,7 @@ export const ROLE_MENUS: Record<UserRole, RoleMenu> = {
     {
       id: "academic",
       label: "Academic",
-      items: [r("students"), r("teachers"), r("timetable"), r("attendance"), r("examinations"), r("reports")],
+      items: [r("students"), r("teachers"), r("subjects"), r("timetable"), r("attendance"), r("examinations"), r("reports")],
     },
     {
       id: "administration",

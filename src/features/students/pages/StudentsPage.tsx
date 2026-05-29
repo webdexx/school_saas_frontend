@@ -2,7 +2,7 @@ import Skeleton from "@/components/ui/Skeleton";
 import { useStudents } from "../hooks/useStudents";
 
 const StudentsPage = () => {
-  const { data: students, isLoading, isError } = useStudents();
+  const { data: students, isLoading, isError, error } = useStudents();
 
   if (isLoading) {
     return (
@@ -22,7 +22,7 @@ const StudentsPage = () => {
   }
 
   if (isError) {
-    return <p>Error Occured</p>;
+    return <p>Error Occured: <span className="bg-gray-100 p-2 rounded">{error.message}</span></p>;
   }
 
   return (
